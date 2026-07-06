@@ -2,50 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SignMatch - Connect & Sign</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignMatch | Modern Dating for the Deaf Community</title>
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="manifest" href="manifest.json">
-    <script type="module" src="js/firebase-config.js"></script>
-    <script type="module" src="js/i18n.js"></script>
-    <script type="module" src="js/app.js"></script>
 </head>
 <body>
 
-    <section id="language-screen" class="screen active glass-panel">
-        <h1 data-i18n="welcome_setup">Welcome to SignMatch</h1>
-        <p data-i18n="choose_language">What language would you like to use?</p>
-        <div class="lang-grid" id="lang-options">
-            <button class="lang-btn" data-lang="en">🇺🇸 English</button>
-            <button class="lang-btn" data-lang="nl">🇳🇱 Nederlands</button>
-            <button class="lang-btn" data-lang="es">🇪🇸 Español</button>
+    <!-- 1. LANGUAGE SELECTION SCREEN -->
+    <section id="language-screen" class="screen active">
+        <div class="glass-panel">
+            <h1>SignMatch</h1>
+            <p>Welcome! Choose your language to continue.</p>
+            <div id="lang-options" class="auth-buttons">
+                <button class="btn secondary" data-lang="en">English</button>
+                <button class="btn secondary" data-lang="nl">Nederlands</button>
             </div>
-    </section>
-
-    <section id="auth-screen" class="screen hidden glass-panel">
-        <h2 data-i18n="create_profile">Create your profile</h2>
-        <div class="auth-buttons">
-            <button id="btn-google-login" class="btn primary" data-i18n="login_google">Continue with Google</button>
-            <button id="btn-email-login" class="btn secondary" data-i18n="login_email">Continue with Email</button>
         </div>
     </section>
 
+    <!-- 2. AUTHENTICATION SCREEN -->
+    <section id="auth-screen" class="screen hidden">
+        <div class="glass-panel">
+            <h2>Welcome Back</h2>
+            <div class="auth-buttons">
+                <button id="btn-google-login" class="btn primary">Continue with Google</button>
+                
+                <!-- Email Login Form -->
+                <div id="email-form" style="margin-top: 20px;">
+                    <input type="email" id="email" placeholder="Email" class="input-field">
+                    <input type="password" id="password" placeholder="Password" class="input-field">
+                    <button id="btn-email-signup" class="btn secondary" style="width: 100%;">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. MAIN APP SCREEN -->
     <section id="app-screen" class="screen hidden">
-        <nav class="top-nav glass-panel">
-            <button id="profile-btn">👤</button>
-            <h2 class="brand">SignMatch</h2>
-            <button id="chat-btn">💬</button>
+        <nav class="top-nav">
+            <h2>SignMatch</h2>
         </nav>
-
-        <div class="swipe-container" id="card-stack">
-            </div>
-
-        <div class="action-buttons">
-            <button id="btn-pass" class="action-btn pass">❌</button>
-            <button id="btn-superlike" class="action-btn super">⭐</button>
-            <button id="btn-like" class="action-btn like">💚</button>
+        <div id="card-stack" class="swipe-container">
+            <!-- Swipe cards will be injected here by JS -->
         </div>
     </section>
 
+    <!-- Load Firebase & Your App Logic -->
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/app.js"></script>
 </body>
 </html>
