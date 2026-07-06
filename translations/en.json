@@ -1,0 +1,13 @@
+{
+  "welcome_setup": "Welcome to SignMatch",
+  "choose_language": "What language would you like to use?",
+  "create_profile": "Create your profile",
+  "login_google": "Continue with Google",
+  "login_email": "Continue with Email",
+  "find_match": "Find your match",
+  "hearing_status": "Hearing Status",
+  "deaf": "Deaf",
+  "hoh": "Hard of Hearing",
+  "hearing": "Hearing",
+  "coda": "CODA"
+}

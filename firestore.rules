@@ -1,0 +1,30 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Profiles Collection
+    match /users/{userId} {
+      // Anyone authenticated can read profiles (apply filters in frontend)
+      allow read: if request.auth != null;
+      // Only the profile owner can write to their own profile
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Matches / Swipes Collection
+    match /swipes/{swipeId} {
+      allow read: if request.auth != null;
+      // Users can only create swipe records where they are the 'swiper'
+      allow create: if request.auth != null && request.resource.data.swiperId == request.auth.uid;
+    }
+
+    // Chat / Messaging
+    match /chats/{chatId} {
+      // Users can only read/write chats if their ID is in the participants array
+      allow read, write: if request.auth != null && request.auth.uid in resource.data.participants;
+      
+      match /messages/{messageId} {
+        allow read, write: if request.auth != null && request.auth.uid in get(/databases/$(database)/documents/chats/$(chatId)).data.participants;
+      }
+    }
+  }
+}
